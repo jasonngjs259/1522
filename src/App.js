@@ -6,11 +6,11 @@ const App = () => {
     const tempColor = [];
 
     const bottles = [
-        { id: 0, left: 300, top: 130 },
-        { id: 1, left: 400, top: 130 },
-        { id: 2, left: 500, top: 130 },
-        { id: 3, left: 350, top: 320 },
-        { id: 4, left: 450, top: 320 },
+        { id: 0, left: "40%", top: "30%" },
+        { id: 1, left: "50%", top: "30%" },
+        { id: 2, left: "60%", top: "30%" },
+        { id: 3, left: "45%", top: "50%" },
+        { id: 4, left: "55%", top: "50%" },
     ];
 
     for (let i = 0; i < colors.length; i++) {
