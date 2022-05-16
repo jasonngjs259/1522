@@ -38,11 +38,11 @@ const App = () => {
 
     shuffle(tempColor);
 
-    for (let n = 0; n < 8; n++) {
+    const countRemainingBottle = bottles.length - colors.length;
+
+    for (let n = 0; n < countRemainingBottle * 4; n++) {
         tempColor.push("transparent");
     }
-
-    console.log(tempColor);
 
     const arrayA = [];
 
@@ -54,20 +54,20 @@ const App = () => {
         arrayA.push(arrayB);
     }
 
-    console.log(arrayA);
-
     let arrayC = [];
 
     for (let c = 0; c < bottles.length; c++) {
         arrayC.push({ ...bottles[c], color: arrayA[c] });
     }
 
-    console.log(arrayC);
+    // water sort logic
+    // const clickBottle = () => {
+
+    // }
 
     return (
         <div className="body">
             <div className="justify-content-center">
-                {/* {showBottles(bottleCount)} */}
                 {arrayC.map((elem) => {
                     return (
                         <Bottle

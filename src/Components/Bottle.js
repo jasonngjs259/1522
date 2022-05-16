@@ -1,34 +1,23 @@
 import React from "react";
+import Color from "./Color";
 
 const Bottle = (props) => {
-    // const colors = [
-    //     { id: 1, color: "red" },
-    //     { id: 2, color: "orange" },
-    //     { id: 3, color: "blue" },
-    //     { id: 4, color: "purple" },
-    //     { id: 5, color: "limegreen" },
-    // ];
+    const initTop = 2.5;
+    const height = 2.5;
 
     return (
         <div className="bottle" style={{ top: props.top, left: props.left }}>
             <div className="bottleCap" />
             <div className="bottleBody">
-                <div
-                    className="color"
-                    style={{ backgroundColor: props.color[0], top: "2.5vh" }}
-                />
-                <div
-                    className="color"
-                    style={{ backgroundColor: props.color[1], top: "5vh" }}
-                />
-                <div
-                    className="color"
-                    style={{ backgroundColor: props.color[2], top: "7.5vh" }}
-                />
-                <div
-                    className="color"
-                    style={{ backgroundColor: props.color[3], top: "10vh" }}
-                />
+                {props.color.map((elem, i) => {
+                    return (
+                        <Color
+                            key={i}
+                            color={elem}
+                            top={initTop + i * height}
+                        />
+                    );
+                })}
             </div>
         </div>
     );
