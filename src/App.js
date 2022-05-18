@@ -3,6 +3,7 @@ import "./App.scss";
 import Game from "./Game";
 
 const App = () => {
+    const colors = ["red", "orange", "blue", "limegreen", "purple"];
     const levelData = [
         {
             id: 0,
@@ -43,7 +44,9 @@ const App = () => {
             <div className="justify-content-center">
                 {levelData.map((elem) => (
                     <div key={elem.id}>
-                        {level === elem.difficulty && <Game elem={elem} />}
+                        {level === elem.difficulty && (
+                            <Game elem={elem} colors={colors} />
+                        )}
                     </div>
                 ))}
             </div>
