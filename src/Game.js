@@ -6,6 +6,8 @@ import shuffle from "./Utils";
 const Game = (props) => {
     const [bottles, setBottles] = useState([]);
     const [restartData, setRestartData] = useState([]);
+    const [move, setMove] = useState(0);
+    const [gameOver, setGameOver] = useState(false);
 
     // const newTempColor = [];
     // setBottles(newBottles);
@@ -50,6 +52,8 @@ const Game = (props) => {
     const handleRestart = () => {
         const newData = [...restartData];
         setBottles(newData);
+        setGameOver(false);
+        setMove(0);
     };
 
     //water sort logic
@@ -161,46 +165,44 @@ const Game = (props) => {
     //     }, 3000);
     // };
 
-    const validateTransfer = (transferColorArray, transfer) => {
-        let countTransparent = 0;
+    // const validateTransfer = (transferColorArray, transfer) => {
+    //     let countTransparent = 0;
 
-        let countColor = 1;
-        let color = null;
-        let startPoint = null;
+    //     let countColor = 1;
+    //     let color = null;
+    //     let startPoint = null;
 
-        for (let i = 0; i < transferColorArray[1].length; i++) {
-            if (transferColorArray[1][i] === "transparent") {
-                countTransparent += 1;
-            }
-        }
+    //     for (let i = 0; i < transferColorArray[1].length; i++) {
+    //         if (transferColorArray[1][i] === "transparent") {
+    //             countTransparent += 1;
+    //         }
+    //     }
 
-        for (let n = 0; n < transferColorArray[0].length; n++) {
-            if (transferColorArray[0][n] !== "transparent") {
-                color = transferColorArray[0][n];
-            } else {
-                continue;
-            }
+    //     for (let n = 0; n < transferColorArray[0].length; n++) {
+    //         if (transferColorArray[0][n] !== "transparent") {
+    //             color = transferColorArray[0][n];
+    //         } else {
+    //             continue;
+    //         }
 
-            if (startPoint === null && color !== "transparent") {
-                startPoint = n;
-            }
+    //         if (startPoint === null && color !== "transparent") {
+    //             startPoint = n;
+    //         }
 
-            if (transferColorArray[0][n] === transferColorArray[0][n + 1]) {
-                countColor += 1;
-            } else {
-                break;
-            }
-        }
+    //         if (transferColorArray[0][n] === transferColorArray[0][n + 1]) {
+    //             countColor += 1;
+    //         } else {
+    //             break;
+    //         }
+    //     }
 
-        if (countColor <= countTransparent) {
-            transfer = true;
-        } else if (countColor > countTransparent) {
-            countColor = countTransparent;
-            transfer = true;
-        }
-
-        console.log(transfer);
-    };
+    //     if (countColor <= countTransparent) {
+    //         transfer = true;
+    //     } else if (countColor > countTransparent) {
+    //         countColor = countTransparent;
+    //         transfer = true;
+    //     }
+    // };
 
     // const handleBottle = (transferColorArray, tempColorArray) => {
     //     const holdColor = [];
@@ -294,14 +296,13 @@ const Game = (props) => {
             }
         }
 
-        console.log(countTransparent);
+        // console.log(countTransparent);
 
         for (let n = 0; n < transferColorArray[0].length; n++) {
             if (
                 transferColorArray[0][n] !== "transparent" &&
                 transferColorArray[0][n] === transferColorArray[0][n + 1]
             ) {
-                console.log(n);
                 countColor += 1;
             } else if (transferColorArray[0][n] === "transparent") {
                 continue;
@@ -310,7 +311,7 @@ const Game = (props) => {
             }
         }
 
-        console.log(countColor);
+        // console.log(countColor);
 
         if (countColor <= countTransparent) {
             transfer = true;
@@ -321,7 +322,7 @@ const Game = (props) => {
             transfer = false;
         }
 
-        console.log(transfer);
+        // console.log(transfer);
 
         if (transfer) {
             // handleBottle(transferColorArray, tempColorArray);
@@ -354,7 +355,7 @@ const Game = (props) => {
                 break;
             }
 
-            console.log(holdColor);
+            // console.log(holdColor);
 
             for (let i = transferColorArray[1].length - 1; i >= 0; i--) {
                 if (
@@ -386,7 +387,7 @@ const Game = (props) => {
                     }
                 }
             }
-            console.log(tempColorArray);
+            // console.log(tempColorArray);
 
             if (transfer) {
                 const newColorArray1 = [clicked[0], transferColorArray[0]];
@@ -437,6 +438,31 @@ const Game = (props) => {
     //     // }
     // };
 
+    const checkComplete = (array) => {
+        const checkCompleteBottle = [...array];
+        const tempCountArray = [];
+
+        checkCompleteBottle.forEach((elem) => {
+            let tempColor = null;
+            let countColor = 1;
+            for (let i = 0; i < elem.color.length; i++) {
+                if (tempColor === null) {
+                    tempColor = elem.color[i];
+                } else if (tempColor === elem.color[i]) {
+                    countColor += 1;
+                }
+            }
+
+            if (countColor === countLiquidLayer) {
+                tempCountArray.push(countColor);
+            }
+        });
+
+        if (tempCountArray.length === checkCompleteBottle.length) {
+            setGameOver(true);
+        }
+    };
+
     const clickBottle = (id, color) => {
         const newBottleArray = [...bottles];
         // console.log(data.color);
@@ -458,6 +484,8 @@ const Game = (props) => {
                 // transferAnimation(clicked);
                 transferLiquid(clicked, transferColorArray, newBottleArray);
                 setBottles(newBottleArray);
+                setMove(move + 1);
+                checkComplete(newBottleArray);
             } else {
                 selectedElement.style.transition = "0.2s linear";
             }
@@ -484,11 +512,17 @@ const Game = (props) => {
                 //     color={data.color}
                 // />
             ))}
+            {gameOver && (
+                <div>
+                    <h3>Completed</h3>
+                </div>
+            )}
+
             <div className="restart-area">
                 <button onClick={handleRestart}>Restart</button>
             </div>
             <div className="count-move-area">
-                <h4>Moves:</h4>
+                <h4>Moves: {move}</h4>
             </div>
         </>
     );
