@@ -304,8 +304,6 @@ const Game = (props) => {
                 transferColorArray[0][n] === transferColorArray[0][n + 1]
             ) {
                 countColor += 1;
-            } else if (transferColorArray[0][n] === "transparent") {
-                continue;
             } else {
                 break;
             }
@@ -338,21 +336,19 @@ const Game = (props) => {
                 ) {
                     color = transferColorArray[0][n];
                     startPoint = n;
-                } else {
-                    continue;
+
+                    transferColorArray[0].splice(startPoint, countColor);
+
+                    for (let p = 0; p < countColor; p++) {
+                        holdColor.push(color);
+                        transferColorArray[0].unshift("transparent");
+                    }
+                    break;
                 }
 
                 // if (startPoint === null && color !== "transparent") {
                 //     startPoint = n;
                 // }
-
-                transferColorArray[0].splice(startPoint, countColor);
-
-                for (let p = 0; p < countColor; p++) {
-                    holdColor.push(color);
-                    transferColorArray[0].unshift("transparent");
-                }
-                break;
             }
 
             // console.log(holdColor);
