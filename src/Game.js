@@ -9,9 +9,6 @@ const Game = (props) => {
     const [move, setMove] = useState(0);
     const [gameOver, setGameOver] = useState(false);
 
-    // const newTempColor = [];
-    // setBottles(newBottles);
-
     useEffect(() => {
         const newBottles = [...props.elem.bottles];
         const tempColor = [];
@@ -44,10 +41,6 @@ const Game = (props) => {
         setRestartData(newBottles);
     }, [props.elem, props.colors]);
 
-    // useEffect(() => {
-    //     console.log(restartData);
-    // }, [restartData]);
-
     //restart button
     const handleRestart = () => {
         const newData = [...restartData];
@@ -61,70 +54,11 @@ const Game = (props) => {
     let transferColorArray = [];
 
     const replaceColorArray = (colorArray, newBottle) => {
-        // console.log(newBottles);
         newBottle[colorArray[0]] = {
             ...newBottle[colorArray[0]],
             color: colorArray[1],
         };
-        // newBottles.forEach((elem) => {
-        //     if (colorArray[0] === elem.id) {
-        //         elem.color = colorArray[1];
-        //     }
-        // });
-        // if (colorArray[0] === data.id) {
-        //     console.log(newBottles);
-
-        // }
     };
-
-    // const handleBottle1 = (array, holdColor) => {
-    //     let countColor = 1;
-    //     let color = null;
-    //     let startPoint = null;
-    //     const emptyBottle = [
-    //         "transparent",
-    //         "transparent",
-    //         "transparent",
-    //         "transparent",
-    //     ];
-
-    //     for (let n = 0; n < array.length; n++) {
-    //         if (array[n] !== "transparent") {
-    //             color = array[n];
-    //         } else {
-    //             continue;
-    //         }
-
-    //         if (startPoint === null && color !== "transparent") {
-    //             startPoint = n;
-    //         }
-
-    //         if (array[n] === array[n + 1]) {
-    //             countColor += 1;
-    //         } else {
-    //             array.splice(startPoint, countColor);
-
-    //             for (let p = 0; p < countColor; p++) {
-    //                 holdColor.push(color);
-    //                 array.unshift("transparent");
-    //             }
-    //             break;
-    //         }
-    //     }
-    // };
-
-    // const handleBottle2 = (array, holdColor, tempColorArray) => {
-    //     // console.log(holdColor);
-    //     for (let i = array.length - 1; i >= 0; i--) {
-    //         if (holdColor.length !== 0 && array[i] === "transparent") {
-    //             tempColorArray.push(holdColor.shift());
-    //         } else if (holdColor.length === 0 && array[i] === "transparent") {
-    //             tempColorArray.push("transparent");
-    //         } else {
-    //             tempColorArray.push(array[i]);
-    //         }
-    //     }
-    // };
 
     // const transferAnimation = (clicked) => {
     //     let selectedElement1 =
@@ -165,120 +99,6 @@ const Game = (props) => {
     //     }, 3000);
     // };
 
-    // const validateTransfer = (transferColorArray, transfer) => {
-    //     let countTransparent = 0;
-
-    //     let countColor = 1;
-    //     let color = null;
-    //     let startPoint = null;
-
-    //     for (let i = 0; i < transferColorArray[1].length; i++) {
-    //         if (transferColorArray[1][i] === "transparent") {
-    //             countTransparent += 1;
-    //         }
-    //     }
-
-    //     for (let n = 0; n < transferColorArray[0].length; n++) {
-    //         if (transferColorArray[0][n] !== "transparent") {
-    //             color = transferColorArray[0][n];
-    //         } else {
-    //             continue;
-    //         }
-
-    //         if (startPoint === null && color !== "transparent") {
-    //             startPoint = n;
-    //         }
-
-    //         if (transferColorArray[0][n] === transferColorArray[0][n + 1]) {
-    //             countColor += 1;
-    //         } else {
-    //             break;
-    //         }
-    //     }
-
-    //     if (countColor <= countTransparent) {
-    //         transfer = true;
-    //     } else if (countColor > countTransparent) {
-    //         countColor = countTransparent;
-    //         transfer = true;
-    //     }
-    // };
-
-    // const handleBottle = (transferColorArray, tempColorArray) => {
-    //     const holdColor = [];
-    //     let color = null;
-    //     let countColor = 1;
-    //     let startPoint = null;
-    //     // const emptyBottle = [
-    //     //     "transparent",
-    //     //     "transparent",
-    //     //     "transparent",
-    //     //     "transparent",
-    //     // ];
-
-    //     for (let n = 0; n < transferColorArray[0].length; n++) {
-    //         if (transferColorArray[0][n] !== "transparent") {
-    //             color = transferColorArray[0][n];
-    //         } else {
-    //             continue;
-    //         }
-
-    //         if (startPoint === null && color !== "transparent") {
-    //             startPoint = n;
-    //         }
-
-    //         if (transferColorArray[0][n] === transferColorArray[0][n + 1]) {
-    //             countColor += 1;
-    //         } else {
-    //             transferColorArray[0].splice(startPoint, countColor);
-
-    //             for (let p = 0; p < countColor; p++) {
-    //                 holdColor.push(color);
-    //                 transferColorArray[0].unshift("transparent");
-    //             }
-    //             break;
-    //         }
-    //     }
-
-    //     console.log(transferColorArray[0]);
-
-    //     console.log(holdColor);
-
-    //     for (let i = transferColorArray[1].length - 1; i >= 0; i--) {
-    //         if (
-    //             holdColor.length !== 0 &&
-    //             transferColorArray[1][i] === "transparent"
-    //         ) {
-    //             tempColorArray.push(holdColor.shift());
-    //         } else if (
-    //             holdColor.length === 0 &&
-    //             transferColorArray[1][i] === "transparent"
-    //         ) {
-    //             tempColorArray.push("transparent");
-    //         } else {
-    //             tempColorArray.push(transferColorArray[1][i]);
-    //         }
-    //     }
-
-    // for (let i = transferColorArray[1].length - 1; i >= 0; i--) {
-    //     if (
-    //         holdColor.length !== 0 &&
-    //         transferColorArray[1] === "transparent"
-    //     ) {
-    //         tempColorArray.push(holdColor.shift());
-    //     } else if (
-    //         holdColor.length === 0 &&
-    //         transferColorArray[1] === "transparent"
-    //     ) {
-    //         tempColorArray.push("transparent");
-    //     } else {
-    //         tempColorArray.push(transferColorArray[1][i]);
-    //     }
-    // }
-
-    //     console.log(tempColorArray);
-    // };
-
     const transferLiquid = (clicked, transferColorArray, newBottles) => {
         const tempColorArray = [];
 
@@ -288,28 +108,43 @@ const Game = (props) => {
 
         let countTransparent = 0;
 
-        let countColor = 1;
+        let countColor = 0;
 
-        for (let i = 0; i < transferColorArray[1].length; i++) {
-            if (transferColorArray[1][i] === "transparent") {
+        for (let a = 0; a < transferColorArray[1].length; a++) {
+            if (transferColorArray[1][a] === "transparent") {
                 countTransparent += 1;
             }
         }
 
-        // console.log(countTransparent);
+        console.log(countTransparent);
 
-        for (let n = 0; n < transferColorArray[0].length; n++) {
+        let tempArray1Color = null;
+
+        for (let b = 0; b < transferColorArray[0].length; b++) {
             if (
-                transferColorArray[0][n] !== "transparent" &&
-                transferColorArray[0][n] === transferColorArray[0][n + 1]
+                transferColorArray[0][b] !== "transparent" &&
+                tempArray1Color === null
+            ) {
+                tempArray1Color = transferColorArray[0][b];
+                console.log(tempArray1Color);
+            }
+
+            if (
+                tempArray1Color === transferColorArray[0][b] &&
+                transferColorArray[0][b] !== "transparent"
             ) {
                 countColor += 1;
-            } else {
+            }
+
+            if (
+                tempArray1Color !== transferColorArray[0][b] &&
+                transferColorArray[0][b] !== "transparent"
+            ) {
                 break;
             }
         }
 
-        // console.log(countColor);
+        console.log(countColor);
 
         if (countColor <= countTransparent) {
             transfer = true;
@@ -351,21 +186,44 @@ const Game = (props) => {
                 // }
             }
 
-            // console.log(holdColor);
+            console.log(holdColor);
+            console.log(transferColorArray[1]);
 
-            for (let i = transferColorArray[1].length - 1; i >= 0; i--) {
+            for (let y = 0; y < transferColorArray[1].length; y++) {
                 if (
-                    transferColorArray[1][i - 1] === "transparent" &&
-                    transferColorArray[1][i] !== "transparent" &&
-                    i - 1 !== 0
+                    transferColorArray[1][y + 1] !== "transparent" &&
+                    transferColorArray[1][y] === "transparent" &&
+                    y + 1 < transferColorArray[1].length - 1
                 ) {
-                    if (holdColor[0] !== transferColorArray[1][i]) {
+                    console.log(transferColorArray[1][y]);
+                    if (holdColor[0] !== transferColorArray[1][y + 1]) {
                         console.log(holdColor[0]);
                         transfer = false;
                         console.log(transfer);
                         break;
                     }
                 }
+                // else if (
+                //     y === transferColorArray[1].length - 1 &&
+                //     transferColorArray[1][y] === "transparent"
+                // ) {
+                //     transfer = true;
+                // }
+            }
+
+            for (let i = transferColorArray[1].length - 1; i >= 0; i--) {
+                // if (
+                //     transferColorArray[1][i - 1] === "transparent" &&
+                //     transferColorArray[1][i] !== "transparent" &&
+                //     i - 1 !== 0
+                // ) {
+                //     if (holdColor[0] !== transferColorArray[1][i]) {
+                //         console.log(holdColor[0]);
+                //         transfer = false;
+                //         console.log(transfer);
+                //         break;
+                //     }
+                // }
 
                 if (transfer) {
                     if (
@@ -383,56 +241,15 @@ const Game = (props) => {
                     }
                 }
             }
-            // console.log(tempColorArray);
 
             if (transfer) {
                 const newColorArray1 = [clicked[0], transferColorArray[0]];
                 const newColorArray2 = [clicked[1], tempColorArray.reverse()];
-
                 replaceColorArray(newColorArray1, newBottles);
                 replaceColorArray(newColorArray2, newBottles);
             }
         }
-
-        // handleBottle1(transferColorArray[0], holdColor);
-        // const newColorArray1 = [clicked[0], transferColorArray[0]];
-
-        // const tempColorArray = [];
-        // handleBottle2(
-        //     transfer,
-        //     transferColorArray[1],
-        //     holdColor,
-        //     tempColorArray
-        // );
-
-        // const newColorArray2 = [clicked[1], tempColorArray.reverse()];
-
-        // if (transfer) {
-        //     replaceColorArray(newColorArray1, newBottles);
-        //     replaceColorArray(newColorArray2, newBottles);
-        // }
     };
-
-    // const transferLiquid = (clicked, transferColorArray, newBottles) => {
-    //     const holdColor = [];
-    //     const transfer = false;
-
-    //     handleBottle1(transferColorArray[0], holdColor);
-    //     const newColorArray1 = [clicked[0], transferColorArray[0]];
-
-    //     const tempColorArray = [];
-    //     handleBottle2(transferColorArray[1], holdColor, tempColorArray);
-
-    //     const newColorArray2 = [clicked[1], tempColorArray.reverse()];
-
-    //     replaceColorArray(newColorArray1, newBottles);
-    //     replaceColorArray(newColorArray2, newBottles);
-
-    //     // if (transfer) {
-    //     //     replaceColorArray(newColorArray1, newBottles);
-    //     //     replaceColorArray(newColorArray2, newBottles);
-    //     // }
-    // };
 
     const checkComplete = (array) => {
         const checkCompleteBottle = [...array];
@@ -479,6 +296,7 @@ const Game = (props) => {
                 // console.log(transferColorArray);
                 // transferAnimation(clicked);
                 transferLiquid(clicked, transferColorArray, newBottleArray);
+                // console.log(tempBottleArray);
                 setBottles(newBottleArray);
                 setMove(move + 1);
                 checkComplete(newBottleArray);
@@ -501,12 +319,6 @@ const Game = (props) => {
                     color={data.color}
                     clickBottle={() => clickBottle(data.id, data.color)}
                 />
-                // <Bottle
-                //     key={data.id}
-                //     top={data.top}
-                //     left={data.left}
-                //     color={data.color}
-                // />
             ))}
             {gameOver && (
                 <div>
