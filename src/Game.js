@@ -193,7 +193,7 @@ const Game = (props) => {
                 if (
                     transferColorArray[1][y + 1] !== "transparent" &&
                     transferColorArray[1][y] === "transparent" &&
-                    y + 1 < transferColorArray[1].length - 1
+                    y + 1 < transferColorArray[1].length
                 ) {
                     console.log(transferColorArray[1][y]);
                     if (holdColor[0] !== transferColorArray[1][y + 1]) {
